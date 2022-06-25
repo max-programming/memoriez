@@ -2,6 +2,7 @@ import { Button, Container } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { EntryForm, MoodSelector } from '@/components/NewPage';
 import { useEntryForm } from '@/hooks/useEntryForm';
+import { Layout } from '@/components';
 
 export default function NewPage() {
   const router = useRouter();
@@ -9,7 +10,7 @@ export default function NewPage() {
     useEntryForm();
 
   return (
-    <Container my='4'>
+    <Layout>
       <form onSubmit={handleSubmit}>
         {router.query.p === 'mood' ? (
           <MoodSelector />
@@ -20,6 +21,6 @@ export default function NewPage() {
           {router.query.p === 'mood' ? 'SUBMIT' : 'NEXT'}
         </Button>
       </form>
-    </Container>
+    </Layout>
   );
 }

@@ -8,6 +8,7 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Heading,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
@@ -50,7 +51,11 @@ const Navbar = () => {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems='center'>
-            <Box>Memories</Box>
+            <NextLink href='/' passHref>
+              <Link _hover={{ textDecor: 'none' }}>
+                <Heading size='md'>Memories</Heading>
+              </Link>
+            </NextLink>
             <HStack as='nav' spacing={4} display={{ base: 'none', md: 'flex' }}>
               {links.map(link => (
                 <NavLink key={link.href} href={link.href}>
