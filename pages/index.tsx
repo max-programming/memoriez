@@ -1,7 +1,7 @@
 import { Button, Container } from '@chakra-ui/react';
 import { withServerSideAuth } from '@clerk/nextjs/ssr';
 import { Entry } from '@prisma/client';
-import { DiaryEntries } from '@/components';
+import { DiaryEntries, Layout } from '@/components';
 import Link from 'next/link';
 import prismaClient from '@/utils/prismaClient';
 
@@ -9,7 +9,7 @@ const prisma = prismaClient();
 
 export default function HomePage({ entries }: { entries: Entry[] }) {
   return (
-    <Container my='4'>
+    <Layout>
       <Link href='/new'>
         <a>
           <Button colorScheme='linkedin' width='full'>
@@ -18,7 +18,7 @@ export default function HomePage({ entries }: { entries: Entry[] }) {
         </a>
       </Link>
       <DiaryEntries entries={entries} />
-    </Container>
+    </Layout>
   );
 }
 
