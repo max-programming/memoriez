@@ -1,52 +1,27 @@
-import { Button, Container } from '@chakra-ui/react';
-import { withServerSideAuth } from '@clerk/nextjs/ssr';
-import { Entry } from '@prisma/client';
+import { Button, Flex, theme } from '@chakra-ui/react';
 import { DiaryEntries, Layout } from '@/components';
 import Link from 'next/link';
-import prismaClient from '@/utils/prismaClient';
+import { useEntryList } from '@/hooks/useEntryList';
+import { HashLoader } from 'react-spinners';
 
-const prisma = prismaClient();
-
-export default function HomePage({ entries }: { entries: Entry[] }) {
+export default function HomePage() {
+  const { isLoading, data } = useEntryList();
   return (
     <Layout>
       <Link href='/new'>
         <a>
-          <Button colorScheme='linkedin' width='full'>
+          <Button mt='5' colorScheme='linkedin' width='full'>
             NEW ENTRY
           </Button>
         </a>
       </Link>
-      <DiaryEntries entries={entries} />
+      {isLoading ? (
+        <Flex justify='center' mt='20'>
+          <HashLoader color={theme.colors.linkedin[200]} size={75} />
+        </Flex>
+      ) : (
+        <DiaryEntries entries={data!} />
+      )}
     </Layout>
   );
 }
-
-export const getServerSideProps = withServerSideAuth(async ({ req }) => {
-  const { userId } = req.auth;
-
-  if (!userId) return { props: { entries: [] } };
-
-  try {
-    const data = await prisma.entry.findMany({
-      where: { userId },
-      orderBy: { date: 'desc' },
-    });
-    const entries = JSON.parse(JSON.stringify(data));
-
-    console.log({ entries });
-
-    return {
-      props: {
-        entries,
-      },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: {
-        entries: [],
-      },
-    };
-  }
-});
