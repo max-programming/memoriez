@@ -13,9 +13,12 @@ type Data = {
 const prisma = prismaClient();
 const emoji = new EmojiAPI();
 const createSchema = z.object({
-  title: z.string().min(1),
   story: z.string().min(1),
   mood: z.string().min(1),
+  title: z
+    .string()
+    .min(1)
+    .max(70, { message: 'The title should not exceed 70 characters' }),
   date: z
     .string()
     .min(1)
