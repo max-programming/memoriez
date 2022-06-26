@@ -9,6 +9,12 @@ async function handler(
   res: NextApiResponse
 ) {
   const { userId } = req.auth;
+  console.log(userId);
+  if (!userId) {
+    return res
+      .status(401)
+      .json({ success: false, message: 'User not logged in' });
+  }
   try {
     const data = await prisma.entry.findMany({
       where: { userId },
@@ -23,7 +29,11 @@ async function handler(
     });
   } catch (error) {
     console.error(error);
-    res.json({ success: false, message: 'Entries not found' + userId });
+    res.json({
+      success: false,
+      message: 'Entries not found ' + userId,
+      data: [],
+    });
   }
 }
 

@@ -9,10 +9,17 @@ import {
   useColorModeValue,
   Stack,
   Heading,
+  Button,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
-import { UserButton } from '@clerk/nextjs';
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from '@clerk/nextjs';
 
 const links = [
   {
@@ -64,8 +71,20 @@ const Navbar = () => {
               ))}
             </HStack>
           </HStack>
-          <Flex align='center'>
-            <UserButton />
+          <Flex align='center' gap={2}>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton mode='modal'>
+                <Button colorScheme='linkedin' variant='ghost'>
+                  Sign in
+                </Button>
+              </SignInButton>
+              <SignUpButton mode='modal'>
+                <Button colorScheme='linkedin'>Sign up</Button>
+              </SignUpButton>
+            </SignedOut>
           </Flex>
         </Flex>
       </Box>

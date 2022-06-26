@@ -6,6 +6,7 @@ import { HashLoader } from 'react-spinners';
 
 export default function HomePage() {
   const { isLoading, data } = useEntryList();
+
   return (
     <Layout>
       <Link href='/new'>
