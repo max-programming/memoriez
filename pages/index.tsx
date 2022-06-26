@@ -21,7 +21,7 @@ export default function HomePage() {
           <HashLoader color={theme.colors.linkedin[200]} size={75} />
         </Flex>
       ) : (
-        <DiaryEntries entries={data!} />
+        <DiaryEntries entries={data || []} />
       )}
     </Layout>
   );
