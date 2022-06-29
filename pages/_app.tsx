@@ -4,13 +4,14 @@ import { ClerkLoaded, ClerkProvider } from '@clerk/nextjs';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import NextNProgress from 'nextjs-progressbar';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { chakraTheme } from '@/utils/chakraTheme';
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
+      <ChakraProvider theme={chakraTheme}>
         <ClerkProvider {...pageProps}>
           <NextNProgress
             options={{ showSpinner: false }}

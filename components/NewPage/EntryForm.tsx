@@ -61,7 +61,7 @@ export const EntryForm = ({
         <FormLabel htmlFor='title'>Title</FormLabel>
         <Input
           id='title'
-          placeholder='Your entry title here'
+          placeholder='Enter a good title!'
           focusBorderColor='linkedin.200'
           borderRadius='lg'
           value={title}
