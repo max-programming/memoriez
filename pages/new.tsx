@@ -6,8 +6,16 @@ import { Layout } from '@/components';
 
 export default function NewPage() {
   const router = useRouter();
-  const { title, story, date, setTitle, setStory, setDate, handleSubmit } =
-    useEntryForm();
+  const {
+    title,
+    story,
+    date,
+    isLoading,
+    setTitle,
+    setStory,
+    setDate,
+    handleSubmit,
+  } = useEntryForm();
 
   return (
     <Layout>
@@ -17,8 +25,15 @@ export default function NewPage() {
         ) : (
           <EntryForm {...{ title, story, date, setTitle, setStory, setDate }} />
         )}
-        <Button colorScheme='linkedin' w='full' type='submit' mt='5'>
-          {router.query.p === 'mood' ? 'SUBMIT' : 'NEXT'}
+        <Button
+          colorScheme='linkedin'
+          w='full'
+          type='submit'
+          mt='5'
+          isLoading={isLoading}
+          loadingText='ADDING...'
+        >
+          {router.query.p === 'mood' ? 'ADD' : 'NEXT'}
         </Button>
       </form>
     </Layout>
