@@ -7,7 +7,7 @@ import { FormEventHandler, useState } from 'react';
 export const useEntryForm = () => {
   const router = useRouter();
   const toast = useToast();
-  const { isSignedIn, userId } = useAuth();
+  const { isSignedIn, userId, getToken } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [story, setStory] = useState('');
@@ -37,12 +37,16 @@ export const useEntryForm = () => {
 
     setIsLoading(true);
     console.log('creating...');
-    const { data } = await axios.post('/api/createEntry', {
-      title,
-      story,
-      mood,
-      date,
-    });
+    const { data } = await axios.post(
+      '/api/createEntry',
+      {
+        title,
+        story,
+        mood,
+        date,
+      },
+      { headers: { Authorization: `Bearer ${await getToken()}` } }
+    );
     console.log({ data });
     await router.push('/');
     setIsLoading(false);
