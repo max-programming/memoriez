@@ -14,6 +14,7 @@ model Entry {
   story  String
   mood   String
   date   DateTime
+  tags   String[]
 
   @@map("entries")
 }

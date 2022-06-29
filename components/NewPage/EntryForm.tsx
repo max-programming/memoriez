@@ -1,29 +1,42 @@
 import {
+  Box,
   Flex,
   FormControl,
   FormLabel,
   Input,
+  Tag,
+  TagCloseButton,
+  TagLabel,
   Textarea,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import { SetState } from '@/types';
+import { TagsInput } from './TagsInput';
 
 interface EntryFormProps {
   title: string;
   story: string;
   date: Date;
+  tags: string[];
   setTitle: SetState<string>;
   setStory: SetState<string>;
   setDate: SetState<Date>;
+  addTag: (text: string) => void;
+  removeTag: (text: string) => void;
 }
 
 export const EntryForm = ({
   title,
   story,
   date,
+  tags,
   setTitle,
   setStory,
   setDate,
+  addTag,
+  removeTag,
 }: EntryFormProps) => {
   return (
     <Flex direction='column' gap={5}>
@@ -81,6 +94,22 @@ export const EntryForm = ({
           onChange={e => setStory(e.target.value)}
           required
         />
+      </FormControl>
+      <FormControl>
+        <FormLabel htmlFor='tags'>Tags</FormLabel>
+        <Box>
+          <TagsInput addTag={addTag} />
+          <Wrap gap={4} pt='5'>
+            {tags.map((tag, i) => (
+              <WrapItem key={i}>
+                <Tag size='lg' colorScheme='linkedin' borderRadius='full'>
+                  <TagLabel>{tag}</TagLabel>
+                  <TagCloseButton onClick={() => removeTag(tag)} />
+                </Tag>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Box>
       </FormControl>
     </Flex>
   );

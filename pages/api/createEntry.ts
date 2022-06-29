@@ -28,6 +28,7 @@ const createSchema = z.object({
     .string()
     .min(1)
     .transform(a => new Date(a)),
+  tags: z.array(z.string()),
 });
 
 async function handler(
@@ -36,7 +37,7 @@ async function handler(
 ) {
   try {
     const { userId } = req.auth;
-    const { title, story, date, mood } = createSchema.parse(req.body);
+    const { title, story, date, mood, tags } = createSchema.parse(req.body);
 
     console.log({ userId });
 
@@ -58,6 +59,7 @@ async function handler(
         title,
         story,
         userId,
+        tags,
       },
     });
 

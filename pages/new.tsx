@@ -7,10 +7,13 @@ import { Layout } from '@/components';
 export default function NewPage() {
   const router = useRouter();
   const {
+    tags,
     title,
     story,
     date,
     isLoading,
+    addTag,
+    removeTag,
     setTitle,
     setStory,
     setDate,
@@ -23,7 +26,19 @@ export default function NewPage() {
         {router.query.p === 'mood' ? (
           <MoodSelector />
         ) : (
-          <EntryForm {...{ title, story, date, setTitle, setStory, setDate }} />
+          <EntryForm
+            {...{
+              title,
+              story,
+              date,
+              tags,
+              setTitle,
+              setStory,
+              setDate,
+              addTag,
+              removeTag,
+            }}
+          />
         )}
         <Button
           colorScheme='linkedin'

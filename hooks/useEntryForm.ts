@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { FormEventHandler, useState } from 'react';
+import { ChangeEvent, FormEventHandler, useState } from 'react';
 
 export const useEntryForm = () => {
   const router = useRouter();
@@ -12,6 +12,17 @@ export const useEntryForm = () => {
   const [title, setTitle] = useState('');
   const [story, setStory] = useState('');
   const [date, setDate] = useState(new Date());
+  const [tags, setTags] = useState<string[]>([]);
+
+  const addTag = (text: string) => {
+    const existingTag = tags.find(tag => tag === text.toLowerCase());
+    if (!existingTag) setTags(prevTags => [...prevTags, text.toLowerCase()]);
+  };
+
+  const removeTag = (text: string) => {
+    const filteredTags = tags.filter(tag => tag !== text);
+    setTags(filteredTags);
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async e => {
     e.preventDefault();
@@ -44,6 +55,7 @@ export const useEntryForm = () => {
         story,
         mood,
         date,
+        tags,
       },
       { headers: { Authorization: `Bearer ${await getToken()}` } }
     );
@@ -53,10 +65,13 @@ export const useEntryForm = () => {
   };
 
   return {
+    tags,
     title,
     story,
     date,
     isLoading,
+    addTag,
+    removeTag,
     setTitle,
     setStory,
     setDate,

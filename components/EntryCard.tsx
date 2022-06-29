@@ -32,8 +32,9 @@ export const EntryCard = ({ entry }: { entry: Entry }) => {
       </Text>
       <Flex gap={2}>
         {/* TODO: SHOW ONLY THE FIRST FOUR TAGS */}
-        <Tag>bus</Tag>
-        <Tag>college</Tag>
+        {entry.tags.map(tag => (
+          <Tag key={tag}>{tag}</Tag>
+        ))}
         {/* <Text>...</Text> */}
       </Flex>
     </Flex>
