@@ -66,6 +66,7 @@ export const EntryForm = ({
           borderRadius='lg'
           value={title}
           onChange={e => setTitle(e.target.value)}
+          required
         />
       </FormControl>
       <FormControl>
@@ -78,6 +79,7 @@ export const EntryForm = ({
           placeholder='Describe your day details here.'
           value={story}
           onChange={e => setStory(e.target.value)}
+          required
         />
       </FormControl>
     </Flex>

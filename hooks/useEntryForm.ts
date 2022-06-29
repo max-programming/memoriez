@@ -15,11 +15,9 @@ export const useEntryForm = () => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
 
-    setIsLoading(true);
     if (router.query.p !== 'mood') return router.push('/new?p=mood');
     if (!title || !story || title.trim() === '' || story.trim() === '') {
       await router.push('/new');
-      setIsLoading(false);
       return toast({
         title: 'Please enter the title and story',
         status: 'error',
@@ -30,6 +28,7 @@ export const useEntryForm = () => {
     if (!mood || mood.trim() === '')
       return toast({ title: 'Please select your mood', status: 'error' });
 
+    setIsLoading(true);
     console.log('creating...');
     const { data } = await axios.post('/api/createEntry', {
       title,
