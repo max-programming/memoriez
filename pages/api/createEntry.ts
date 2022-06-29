@@ -1,5 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { RequireAuthProp, requireAuth } from '@clerk/nextjs/api';
+import {
+  RequireAuthProp,
+  requireAuth,
+  withAuth,
+  WithAuthProp,
+} from '@clerk/nextjs/api';
 import { z, ZodError } from 'zod';
 import { EmojiAPI } from 'emoji-api';
 import prismaClient from '@/utils/prismaClient';
@@ -26,12 +31,19 @@ const createSchema = z.object({
 });
 
 async function handler(
-  req: RequireAuthProp<NextApiRequest>,
+  req: WithAuthProp<NextApiRequest>,
   res: NextApiResponse<Data>
 ) {
   try {
     const { userId } = req.auth;
     const { title, story, date, mood } = createSchema.parse(req.body);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'Not logged in',
+      });
+    }
 
     const {
       Twitter: { url },
@@ -60,4 +72,4 @@ async function handler(
   }
 }
 
-export default requireAuth(handler);
+export default withAuth(handler);

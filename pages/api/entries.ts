@@ -1,15 +1,20 @@
 import prismaClient from '@/utils/prismaClient';
-import { requireAuth, RequireAuthProp } from '@clerk/nextjs/api';
+import {
+  requireAuth,
+  RequireAuthProp,
+  withAuth,
+  WithAuthProp,
+} from '@clerk/nextjs/api';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = prismaClient();
 
 async function handler(
-  req: RequireAuthProp<NextApiRequest>,
+  req: WithAuthProp<NextApiRequest>,
   res: NextApiResponse
 ) {
   const { userId } = req.auth;
-  console.log(userId);
+  console.log({ userId });
   if (!userId) {
     return res
       .status(401)
@@ -37,4 +42,4 @@ async function handler(
   }
 }
 
-export default requireAuth(handler);
+export default withAuth(handler);
