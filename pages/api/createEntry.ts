@@ -22,7 +22,9 @@ const createSchema = z.object({
     .string()
     .min(1)
     .transform(a => new Date(a)),
-  tags: z.array(z.string()),
+  tags: z
+    .array(z.string())
+    .transform(tags => tags.map(tag => tag.replaceAll(',', ''))),
 });
 
 async function handler(
