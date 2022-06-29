@@ -25,7 +25,7 @@ export const EntryCard = ({
 }) => {
   return (
     <Flex
-      w='sm'
+      w={{ base: 'xs', md: 'sm' }}
       h='md'
       direction='column'
       borderWidth='1px'

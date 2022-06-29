@@ -17,7 +17,7 @@ export default function HomePage() {
             <Button
               mt='5'
               colorScheme='whatsapp'
-              width='md'
+              width={{ base: 'xs', md: 'md' }}
               leftIcon={<FaPlus />}
             >
               NEW ENTRY
