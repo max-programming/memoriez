@@ -14,15 +14,23 @@ import { Entry } from '@prisma/client';
 export const EntryCard = ({ entry }: { entry: Entry }) => {
   return (
     <Flex
+      gap={4}
+      p='5'
+      w='sm'
+      minH='sm'
       direction='column'
       borderWidth='1px'
       borderRadius='md'
       borderColor={useColorModeValue('gray.900', 'gray.500')}
       bg={useColorModeValue('gray.100', 'gray.900')}
-      gap={4}
-      p='5'
-      w='sm'
-      minH='sm'
+      transition='all 0.2s ease'
+      _hover={{
+        bg: useColorModeValue('gray.300', 'gray.700'),
+        borderColor: useColorModeValue('gray.700', 'gray.700'),
+      }}
+      _active={{
+        bg: useColorModeValue('gray.400', 'gray.600'),
+      }}
     >
       <Flex justify={'space-between'} w='full'>
         <Text fontSize='xl'>{format(new Date(entry.date), 'PP')}</Text>

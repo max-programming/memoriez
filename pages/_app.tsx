@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <NextNProgress
             options={{ showSpinner: false }}
-            color={theme.colors.linkedin[200]}
+            color={theme.colors.whatsapp[200]}
           />
           <ClerkLoaded>
             <Component {...pageProps} />

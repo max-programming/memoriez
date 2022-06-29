@@ -41,7 +41,7 @@ export default function NewPage() {
           />
         )}
         <Button
-          colorScheme='linkedin'
+          colorScheme='whatsapp'
           w='full'
           type='submit'
           mt='5'

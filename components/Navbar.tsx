@@ -77,12 +77,12 @@ const Navbar = () => {
             </SignedIn>
             <SignedOut>
               <SignInButton mode='modal'>
-                <Button colorScheme='linkedin' variant='ghost'>
+                <Button colorScheme='whatsapp' variant='ghost'>
                   Sign in
                 </Button>
               </SignInButton>
               <SignUpButton mode='modal'>
-                <Button colorScheme='linkedin'>Sign up</Button>
+                <Button colorScheme='whatsapp'>Sign up</Button>
               </SignUpButton>
             </SignedOut>
           </Flex>

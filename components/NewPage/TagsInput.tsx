@@ -22,6 +22,7 @@ export const TagsInput = ({ addTag }: Props) => {
         value={tagInput}
         onChange={e => setTagInput(e.target.value)}
         onKeyDown={handleKeyDown}
+        focusBorderColor='whatsapp.200'
       />
     </>
   );

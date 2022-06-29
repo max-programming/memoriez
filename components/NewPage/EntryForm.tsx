@@ -48,23 +48,23 @@ export const EntryForm = ({
           onDateChange={setDate}
           propsConfigs={{
             inputProps: {
-              focusBorderColor: 'linkedin.200',
+              focusBorderColor: 'whatsapp.200',
               borderRadius: 'lg',
             },
             dateNavBtnProps: {
-              colorScheme: 'linkedin',
+              colorScheme: 'whatsapp',
             },
             dayOfMonthBtnProps: {
               defaultBtnProps: {
                 _hover: {
-                  bg: 'linkedin.300',
+                  bg: 'whatsapp.300',
                 },
               },
               selectedBtnProps: {
-                background: 'linkedin.200',
+                background: 'whatsapp.200',
               },
               todayBtnProps: {
-                background: 'linkedin.400',
+                background: 'whatsapp.400',
               },
             },
           }}
@@ -75,7 +75,7 @@ export const EntryForm = ({
         <Input
           id='title'
           placeholder='Enter a good title!'
-          focusBorderColor='linkedin.200'
+          focusBorderColor='whatsapp.200'
           borderRadius='lg'
           value={title}
           onChange={e => setTitle(e.target.value)}
@@ -87,7 +87,7 @@ export const EntryForm = ({
         <Textarea
           id='story'
           name='story'
-          focusBorderColor='linkedin.200'
+          focusBorderColor='whatsapp.200'
           borderRadius='lg'
           placeholder='Describe your day details here.'
           value={story}
@@ -102,7 +102,7 @@ export const EntryForm = ({
           <Wrap gap={4} pt='5'>
             {tags.map((tag, i) => (
               <WrapItem key={i}>
-                <Tag size='lg' colorScheme='linkedin' borderRadius='full'>
+                <Tag size='lg' colorScheme='whatsapp' borderRadius='full'>
                   <TagLabel>{tag}</TagLabel>
                   <TagCloseButton onClick={() => removeTag(tag)} />
                 </Tag>
