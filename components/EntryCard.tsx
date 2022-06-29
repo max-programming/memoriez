@@ -5,6 +5,8 @@ import {
   Tag,
   Text,
   useColorModeValue,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { Entry } from '@prisma/client';
@@ -13,12 +15,14 @@ export const EntryCard = ({ entry }: { entry: Entry }) => {
   return (
     <Flex
       direction='column'
-      gap={4}
-      p='5'
       borderWidth='1px'
       borderRadius='md'
       borderColor={useColorModeValue('gray.900', 'gray.500')}
       bg={useColorModeValue('gray.100', 'gray.900')}
+      gap={4}
+      p='5'
+      w='sm'
+      minH='sm'
     >
       <Flex justify={'space-between'} w='full'>
         <Text fontSize='xl'>{format(new Date(entry.date), 'PP')}</Text>
@@ -30,13 +34,13 @@ export const EntryCard = ({ entry }: { entry: Entry }) => {
           ? entry.story.slice(0, 250) + '...'
           : entry.story}
       </Text>
-      <Flex gap={2}>
-        {/* TODO: SHOW ONLY THE FIRST FOUR TAGS */}
+      <Wrap>
         {entry.tags.map(tag => (
-          <Tag key={tag}>{tag}</Tag>
+          <WrapItem key={tag}>
+            <Tag>{tag}</Tag>
+          </WrapItem>
         ))}
-        {/* <Text>...</Text> */}
-      </Flex>
+      </Wrap>
     </Flex>
   );
 };

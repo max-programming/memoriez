@@ -6,7 +6,9 @@ export const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Navbar />
-      <Container my='4'>{children}</Container>
+      <Container my='4' maxW='container.lg'>
+        {children}
+      </Container>
     </>
   );
 };
