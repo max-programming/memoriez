@@ -13,6 +13,7 @@ import {
   UseModalProps,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 import { useState } from 'react';
 import { FaPenAlt, FaTrash } from 'react-icons/fa';
@@ -62,13 +63,19 @@ const DeleteModal = ({
   entryId,
   refetch,
 }: UseModalProps & { entryId: string; refetch: any }) => {
+  const { getToken } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   const deleteEntry = async () => {
     setIsLoading(true);
-    await axios.post('/api/deleteEntry', {
-      entryId,
-    });
+    const token = await getToken();
+    await axios.post(
+      '/api/deleteEntry',
+      {
+        entryId,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     await refetch();
     setIsLoading(false);
     onClose();
