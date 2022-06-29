@@ -1,10 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import {
-  RequireAuthProp,
-  requireAuth,
-  withAuth,
-  WithAuthProp,
-} from '@clerk/nextjs/api';
+import { RequireAuthProp, requireAuth } from '@clerk/nextjs/api';
 import { z, ZodError } from 'zod';
 import { EmojiAPI } from 'emoji-api';
 import { prisma } from '@/utils/db';

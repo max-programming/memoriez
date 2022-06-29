@@ -1,10 +1,5 @@
 import { prisma } from '@/utils/db';
-import {
-  requireAuth,
-  RequireAuthProp,
-  withAuth,
-  WithAuthProp,
-} from '@clerk/nextjs/api';
+import { requireAuth, RequireAuthProp } from '@clerk/nextjs/api';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 async function handler(
