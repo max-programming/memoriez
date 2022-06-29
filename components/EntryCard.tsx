@@ -16,7 +16,13 @@ import { Entry } from '@prisma/client';
 import { EntryActions } from './EntryActions';
 import NextLink from 'next/link';
 
-export const EntryCard = ({ entry }: { entry: Entry }) => {
+export const EntryCard = ({
+  entry,
+  refetch,
+}: {
+  entry: Entry;
+  refetch: any;
+}) => {
   return (
     <Flex
       w='sm'
@@ -64,7 +70,7 @@ export const EntryCard = ({ entry }: { entry: Entry }) => {
         </Flex>
       </NextLink>
       <Divider />
-      <EntryActions />
+      <EntryActions refetch={refetch} entryId={entry.id} />
     </Flex>
   );
 };

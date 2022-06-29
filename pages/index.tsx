@@ -4,9 +4,10 @@ import { useEntryList } from '@/hooks/useEntryList';
 import { HashLoader } from 'react-spinners';
 import { FaPlus } from 'react-icons/fa';
 import Link from 'next/link';
+import { RefetchOptions } from 'react-query';
 
 export default function HomePage() {
-  const { isLoading, data } = useEntryList();
+  const { isLoading, data, refetch } = useEntryList();
 
   return (
     <Layout>
@@ -29,7 +30,7 @@ export default function HomePage() {
           <HashLoader color={theme.colors.whatsapp[200]} size={75} />
         </Flex>
       ) : (
-        <DiaryEntries entries={data || []} />
+        <DiaryEntries refetch={refetch} entries={data || []} />
       )}
     </Layout>
   );
