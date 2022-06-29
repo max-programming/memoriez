@@ -1,20 +1,22 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model Entry {
-  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  id     String   @id @default(cuid())
   userId String
-  title  String
+  title  String   @db.VarChar(60)
   story  String
   mood   String
   date   DateTime
-  tags   String[]
+  tags   String
 
   @@map("entries")
 }

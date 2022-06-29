@@ -53,7 +53,7 @@ async function handler(
         title,
         story,
         userId,
-        tags,
+        tags: tags.join(','),
       },
     });
 

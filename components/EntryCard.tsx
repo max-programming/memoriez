@@ -61,7 +61,7 @@ export const EntryCard = ({
               : entry.story}
           </Text>
           <Wrap>
-            {entry.tags.map(tag => (
+            {entry.tags.split(',').map(tag => (
               <WrapItem key={tag}>
                 <Tag>{tag}</Tag>
               </WrapItem>
