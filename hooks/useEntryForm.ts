@@ -1,4 +1,5 @@
 import { useToast } from '@chakra-ui/react';
+import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FormEventHandler, useState } from 'react';
@@ -6,6 +7,7 @@ import { FormEventHandler, useState } from 'react';
 export const useEntryForm = () => {
   const router = useRouter();
   const toast = useToast();
+  const { isSignedIn, userId } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [story, setStory] = useState('');
@@ -13,6 +15,11 @@ export const useEntryForm = () => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async e => {
     e.preventDefault();
+    console.log({ userId, isSignedIn });
+    if (!isSignedIn) {
+      console.log("User isn't signed in ");
+      return router.push('/');
+    }
     const formData = new FormData(e.target as HTMLFormElement);
 
     if (router.query.p !== 'mood') return router.push('/new?p=mood');
