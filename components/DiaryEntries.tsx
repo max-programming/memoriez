@@ -8,13 +8,9 @@ export const DiaryEntries = ({ entries }: { entries: Entry[] }) => {
     <Box my='10'>
       <Wrap justify='center' spacing={10} align='center'>
         {entries.map(entry => (
-          <NextLink href={`/entry/${entry.id}`} key={entry.id} passHref>
-            <Link _hover={{ textDecor: 'none' }}>
-              <WrapItem>
-                <EntryCard entry={entry} />
-              </WrapItem>
-            </Link>
-          </NextLink>
+          <WrapItem key={entry.id}>
+            <EntryCard entry={entry} />
+          </WrapItem>
         ))}
       </Wrap>
     </Box>

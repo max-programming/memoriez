@@ -23,7 +23,7 @@ const createSchema = z.object({
   title: z
     .string()
     .min(1)
-    .max(70, { message: 'The title should not exceed 70 characters' }),
+    .max(60, { message: 'The title should not exceed 60 characters' }),
   date: z
     .string()
     .min(1)
