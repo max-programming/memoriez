@@ -10,7 +10,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const prisma = prismaClient();
 
 async function handler(
-  req: WithAuthProp<NextApiRequest>,
+  req: RequireAuthProp<NextApiRequest>,
   res: NextApiResponse
 ) {
   const { userId } = req.auth;
@@ -42,4 +42,4 @@ async function handler(
   }
 }
 
-export default withAuth(handler);
+export default requireAuth(handler);

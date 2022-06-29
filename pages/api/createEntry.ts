@@ -31,12 +31,14 @@ const createSchema = z.object({
 });
 
 async function handler(
-  req: WithAuthProp<NextApiRequest>,
+  req: RequireAuthProp<NextApiRequest>,
   res: NextApiResponse<Data>
 ) {
   try {
     const { userId } = req.auth;
     const { title, story, date, mood } = createSchema.parse(req.body);
+
+    console.log({ userId });
 
     if (!userId) {
       return res.status(401).json({
@@ -72,4 +74,4 @@ async function handler(
   }
 }
 
-export default withAuth(handler);
+export default requireAuth(handler);
