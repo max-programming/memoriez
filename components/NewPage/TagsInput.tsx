@@ -9,7 +9,8 @@ export const TagsInput = ({ addTag }: Props) => {
   const [tagInput, setTagInput] = useState('');
 
   const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = e => {
-    if (e.key === 'Enter') {
+    if (tagInput.trim() === '') return;
+    if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
       addTag(tagInput);
       setTagInput('');
