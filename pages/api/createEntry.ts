@@ -7,7 +7,7 @@ import {
 } from '@clerk/nextjs/api';
 import { z, ZodError } from 'zod';
 import { EmojiAPI } from 'emoji-api';
-import prismaClient from '@/utils/prismaClient';
+import { prisma } from '@/utils/db';
 
 type Data = {
   success: boolean;
@@ -15,7 +15,6 @@ type Data = {
   data?: any;
 };
 
-const prisma = prismaClient();
 const emoji = new EmojiAPI();
 const createSchema = z.object({
   story: z.string().min(1),

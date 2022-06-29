@@ -1,4 +1,4 @@
-import prismaClient from '@/utils/prismaClient';
+import { prisma } from '@/utils/db';
 import {
   requireAuth,
   RequireAuthProp,
@@ -6,8 +6,6 @@ import {
   WithAuthProp,
 } from '@clerk/nextjs/api';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-const prisma = prismaClient();
 
 async function handler(
   req: RequireAuthProp<NextApiRequest>,

@@ -1,9 +1,8 @@
-import prismaClient from '@/utils/prismaClient';
+import { prisma } from '@/utils/db';
 import { requireAuth, RequireAuthProp } from '@clerk/nextjs/api';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-const prisma = prismaClient();
 const deleteSchema = z.object({ entryId: z.string().min(1) });
 
 async function handler(
