@@ -1,6 +1,5 @@
 import { withServerSideAuth } from '@clerk/nextjs/ssr';
 import { GetServerSideProps } from 'next';
-import { prisma } from '@/utils/db';
 import { Entry } from '@prisma/client';
 import {
   Box,
@@ -8,12 +7,12 @@ import {
   Flex,
   Heading,
   Image,
-  Tag,
   Text,
   Wrap,
   WrapItem,
 } from '@chakra-ui/react';
 import { CustomTag, Layout } from '@/components';
+import { getEntryById } from '@/utils/getEntryById';
 
 export default function EntryPage({ entry }: { entry: Entry }) {
   const tags = entry.tags.split(',');
@@ -46,12 +45,12 @@ export const getServerSideProps: GetServerSideProps = withServerSideAuth(
     const entryId = query.entryId as string;
     const { userId } = req.auth;
     if (!userId) return { notFound: true };
-    const data = await prisma.entry.findUnique({ where: { id: entryId } });
-    if (data?.userId !== userId) return { notFound: true };
+    const entry = await getEntryById(entryId);
+    if (entry?.userId !== userId) return { notFound: true };
 
     return {
       props: {
-        entry: JSON.parse(JSON.stringify(data)),
+        entry,
       },
     };
   },
