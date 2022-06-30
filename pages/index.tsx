@@ -4,7 +4,6 @@ import { useEntryList } from '@/hooks/useEntryList';
 import { HashLoader } from 'react-spinners';
 import { FaPlus } from 'react-icons/fa';
 import Link from 'next/link';
-import { RefetchOptions } from 'react-query';
 
 export default function HomePage() {
   const { isLoading, data, refetch } = useEntryList();

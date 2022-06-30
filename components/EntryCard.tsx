@@ -26,7 +26,7 @@ export const EntryCard = ({
   return (
     <Flex
       w={{ base: 'xs', md: 'sm' }}
-      h='md'
+      h='2xl'
       direction='column'
       borderWidth='1px'
       borderRadius='md'
@@ -38,8 +38,6 @@ export const EntryCard = ({
         <Flex
           as={Link}
           flex={2}
-          p='5'
-          gap={4}
           transition='all 0.2s ease'
           direction='column'
           _hover={{
@@ -50,23 +48,26 @@ export const EntryCard = ({
             bg: useColorModeValue('gray.400', 'gray.600'),
           }}
         >
-          <Flex justify={'space-between'} w='full'>
-            <Text fontSize='xl'>{format(new Date(entry.date), 'PP')}</Text>
-            <Image w='10' h='10' src={entry.mood} alt='mood' />
+          <Image src={entry.coverImage || ''} alt='' />
+          <Flex p='5' gap={4} flexDir='column'>
+            <Flex justify={'space-between'} w='full'>
+              <Text fontSize='xl'>{format(new Date(entry.date), 'PP')}</Text>
+              <Image w='10' h='10' src={entry.mood} alt='mood' />
+            </Flex>
+            <Heading size='lg'>{entry.title}</Heading>
+            <Text>
+              {entry.story.length > 250
+                ? entry.story.slice(0, 250) + '...'
+                : entry.story}
+            </Text>
+            <Wrap>
+              {entry.tags.split(',').map(tag => (
+                <WrapItem key={tag}>
+                  <Tag>{tag}</Tag>
+                </WrapItem>
+              ))}
+            </Wrap>
           </Flex>
-          <Heading size='lg'>{entry.title}</Heading>
-          <Text>
-            {entry.story.length > 250
-              ? entry.story.slice(0, 250) + '...'
-              : entry.story}
-          </Text>
-          <Wrap>
-            {entry.tags.split(',').map(tag => (
-              <WrapItem key={tag}>
-                <Tag>{tag}</Tag>
-              </WrapItem>
-            ))}
-          </Wrap>
         </Flex>
       </NextLink>
       <Divider />
