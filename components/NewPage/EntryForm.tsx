@@ -15,6 +15,7 @@ import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import { SetState } from '@/types';
 import { TagsInput } from './TagsInput';
 import { CoverImageSelector } from './CoverImageSelector';
+import { CustomTag } from '../CustomTag';
 
 interface EntryFormProps {
   title: string;
@@ -100,10 +101,13 @@ export const EntryForm = (props: EntryFormProps) => {
           <Wrap gap={4} pt='5'>
             {props.tags.map((tag, i) => (
               <WrapItem key={i}>
-                <Tag size='lg' colorScheme='whatsapp' borderRadius='full'>
-                  <TagLabel>{tag}</TagLabel>
-                  <TagCloseButton onClick={() => props.removeTag(tag)} />
-                </Tag>
+                <CustomTag
+                  closeButton={
+                    <TagCloseButton onClick={() => props.removeTag(tag)} />
+                  }
+                >
+                  {tag}
+                </CustomTag>{' '}
               </WrapItem>
             ))}
           </Wrap>

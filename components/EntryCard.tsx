@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   Image,
-  Tag,
   Link,
   Text,
   useColorModeValue,
@@ -15,6 +14,7 @@ import { format } from 'date-fns';
 import { Entry } from '@prisma/client';
 import { EntryActions } from './EntryActions';
 import NextLink from 'next/link';
+import { CustomTag } from './CustomTag';
 
 export const EntryCard = ({
   entry,
@@ -63,7 +63,7 @@ export const EntryCard = ({
             <Wrap>
               {entry.tags.split(',').map(tag => (
                 <WrapItem key={tag}>
-                  <Tag>{tag}</Tag>
+                  <CustomTag>{tag}</CustomTag>
                 </WrapItem>
               ))}
             </Wrap>
