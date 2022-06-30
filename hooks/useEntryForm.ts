@@ -13,6 +13,7 @@ export const useEntryForm = () => {
   const [story, setStory] = useState('');
   const [date, setDate] = useState(new Date());
   const [tags, setTags] = useState<string[]>([]);
+  const [selectedPhoto, setSelectedPhoto] = useState('');
 
   const addTag = (text: string) => {
     const existingTag = tags.find(tag => tag === text.toLowerCase());
@@ -56,6 +57,7 @@ export const useEntryForm = () => {
         mood,
         date,
         tags,
+        coverImage: selectedPhoto,
       },
       { headers: { Authorization: `Bearer ${await getToken()}` } }
     );
@@ -69,6 +71,7 @@ export const useEntryForm = () => {
     title,
     story,
     date,
+    selectedPhoto,
     isLoading,
     addTag,
     removeTag,
@@ -76,5 +79,6 @@ export const useEntryForm = () => {
     setStory,
     setDate,
     handleSubmit,
+    setSelectedPhoto,
   };
 };

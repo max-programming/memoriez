@@ -10,13 +10,14 @@ datasource db {
 }
 
 model Entry {
-  id     String   @id @default(cuid())
-  userId String
-  title  String   @db.VarChar(60)
-  story  String
-  mood   String
-  date   DateTime
-  tags   String
+  id         String   @id @default(cuid())
+  userId     String
+  title      String   @db.VarChar(60)
+  story      String
+  mood       String
+  date       DateTime
+  tags       String
+  coverImage String?
 
   @@map("entries")
 }

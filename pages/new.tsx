@@ -6,46 +6,22 @@ import { Layout } from '@/components';
 
 export default function NewPage() {
   const router = useRouter();
-  const {
-    tags,
-    title,
-    story,
-    date,
-    isLoading,
-    addTag,
-    removeTag,
-    setTitle,
-    setStory,
-    setDate,
-    handleSubmit,
-  } = useEntryForm();
+  const entryFormProps = useEntryForm();
 
   return (
     <Layout>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={entryFormProps.handleSubmit}>
         {router.query.p === 'mood' ? (
           <MoodSelector />
         ) : (
-          <EntryForm
-            {...{
-              title,
-              story,
-              date,
-              tags,
-              setTitle,
-              setStory,
-              setDate,
-              addTag,
-              removeTag,
-            }}
-          />
+          <EntryForm {...entryFormProps} />
         )}
         <Button
           colorScheme='whatsapp'
           w='full'
           type='submit'
           mt='5'
-          isLoading={isLoading}
+          isLoading={entryFormProps.isLoading}
           loadingText='ADDING...'
         >
           {router.query.p === 'mood' ? 'ADD' : 'NEXT'}

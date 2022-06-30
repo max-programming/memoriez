@@ -1,15 +1,14 @@
-import { requireAuth, RequireAuthProp } from '@clerk/nextjs/api';
+import { IPhoto } from '@/types';
+import { withAuth, WithAuthProp } from '@clerk/nextjs/api';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createClient, Photo, PhotosWithTotalResults } from 'pexels';
-
-interface IPhoto extends Photo {
-  alt: string;
-}
+import { createClient, PhotosWithTotalResults } from 'pexels';
 
 async function handler(
-  req: RequireAuthProp<NextApiRequest>,
+  req: WithAuthProp<NextApiRequest>,
   res: NextApiResponse
 ) {
+  const { sessionId } = req.auth;
+  if (!sessionId) return res.status(401).json({ message: 'Unauthroized' });
   const { q } = req.query;
   const client = createClient(process.env.PEXELS_API_KEY!);
   let data: PhotosWithTotalResults;
@@ -28,12 +27,14 @@ async function handler(
 
   const photos = allData.map(photo => ({
     id: photo.id,
-    src: photo.src.original + '?auto=compress',
+    src: photo.src.medium,
     alt: photo.alt,
   }));
+
+  // console.log(allData);
 
   return res.json(photos);
 }
 
-export default requireAuth(handler);
+export default withAuth(handler);
 // export default handler;

@@ -14,38 +14,35 @@ import {
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import { SetState } from '@/types';
 import { TagsInput } from './TagsInput';
+import { CoverImageSelector } from './CoverImageSelector';
 
 interface EntryFormProps {
   title: string;
   story: string;
   date: Date;
   tags: string[];
+  selectedPhoto: string;
   setTitle: SetState<string>;
   setStory: SetState<string>;
+  setSelectedPhoto: SetState<string>;
   setDate: SetState<Date>;
   addTag: (text: string) => void;
   removeTag: (text: string) => void;
 }
 
-export const EntryForm = ({
-  title,
-  story,
-  date,
-  tags,
-  setTitle,
-  setStory,
-  setDate,
-  addTag,
-  removeTag,
-}: EntryFormProps) => {
+export const EntryForm = (props: EntryFormProps) => {
   return (
     <Flex direction='column' gap={5}>
+      <CoverImageSelector
+        selectedPhoto={props.selectedPhoto}
+        setSelectedPhoto={props.setSelectedPhoto}
+      />
       <FormControl>
         <FormLabel htmlFor='date'>Date</FormLabel>
         <SingleDatepicker
           id='date'
-          date={date}
-          onDateChange={setDate}
+          date={props.date}
+          onDateChange={props.setDate}
           propsConfigs={{
             inputProps: {
               focusBorderColor: 'whatsapp.200',
@@ -77,8 +74,8 @@ export const EntryForm = ({
           placeholder='Enter a good title!'
           focusBorderColor='whatsapp.200'
           borderRadius='lg'
-          value={title}
-          onChange={e => setTitle(e.target.value)}
+          value={props.title}
+          onChange={e => props.setTitle(e.target.value)}
           required
         />
       </FormControl>
@@ -90,21 +87,21 @@ export const EntryForm = ({
           focusBorderColor='whatsapp.200'
           borderRadius='lg'
           placeholder='Describe your day details here.'
-          value={story}
-          onChange={e => setStory(e.target.value)}
+          value={props.story}
+          onChange={e => props.setStory(e.target.value)}
           required
         />
       </FormControl>
       <FormControl>
         <FormLabel htmlFor='tags'>Tags</FormLabel>
         <Box>
-          <TagsInput addTag={addTag} />
+          <TagsInput addTag={props.addTag} />
           <Wrap gap={4} pt='5'>
-            {tags.map((tag, i) => (
+            {props.tags.map((tag, i) => (
               <WrapItem key={i}>
                 <Tag size='lg' colorScheme='whatsapp' borderRadius='full'>
                   <TagLabel>{tag}</TagLabel>
-                  <TagCloseButton onClick={() => removeTag(tag)} />
+                  <TagCloseButton onClick={() => props.removeTag(tag)} />
                 </Tag>
               </WrapItem>
             ))}

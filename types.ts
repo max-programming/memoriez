@@ -1,3 +1,4 @@
+import { Photo } from 'pexels';
 import { Dispatch, SetStateAction } from 'react';
 
 export type SetState<T> = Dispatch<SetStateAction<T>>;
@@ -12,4 +13,8 @@ export interface EntryType {
     mood: string;
     date: string;
   };
+}
+
+export interface IPhoto extends Photo {
+  alt: string;
 }

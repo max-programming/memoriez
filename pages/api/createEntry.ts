@@ -14,6 +14,7 @@ const emoji = new EmojiAPI();
 const createSchema = z.object({
   story: z.string().min(1),
   mood: z.string().min(1),
+  coverImage: z.string().url().nullable(),
   title: z
     .string()
     .min(1)
@@ -33,7 +34,9 @@ async function handler(
 ) {
   try {
     const { userId } = req.auth;
-    const { title, story, date, mood, tags } = createSchema.parse(req.body);
+    const { coverImage, title, story, date, mood, tags } = createSchema.parse(
+      req.body
+    );
 
     console.log({ userId });
 
@@ -55,6 +58,7 @@ async function handler(
         title,
         story,
         userId,
+        coverImage,
         tags: tags.join(','),
       },
     });
