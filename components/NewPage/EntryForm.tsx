@@ -89,6 +89,7 @@ export const EntryForm = (props: EntryFormProps) => {
           placeholder='Describe your day details here.'
           value={props.story}
           onChange={e => props.setStory(e.target.value)}
+          rows={15}
           required
         />
       </FormControl>

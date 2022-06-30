@@ -62,7 +62,7 @@ export const CoverImageSelector = ({
           <Image w='28' src={selectedPhoto} alt='' mr='5' />
         )}
         <Button onClick={onOpen} leftIcon={<PexelsIcon />}>
-          Pick a cover image from Pexels
+          Pick a cover image
         </Button>
       </Flex>
 

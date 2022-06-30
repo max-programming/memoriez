@@ -16,10 +16,25 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ClerkProvider {...pageProps}>
           <DefaultSeo
             title="Memoriez - What's in your Memoriez"
+            additionalLinkTags={[
+              {
+                rel: 'icon',
+                href: '/logo.png',
+              },
+            ]}
+            twitter={{
+              cardType: 'summary_large_image',
+              handle: '@MaxProgramming1',
+            }}
             openGraph={{
               type: 'website',
               url: 'https://www.memoriez.cc',
               site_name: "Memoriez - What's in your Memoriez",
+              images: [
+                {
+                  url: '/cover.png',
+                },
+              ],
             }}
           />
           <NextNProgress
