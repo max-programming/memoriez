@@ -13,7 +13,7 @@ model Entry {
   id         String   @id @default(cuid())
   userId     String
   title      String   @db.VarChar(60)
-  story      String
+  story      String   @db.LongText
   mood       String
   date       DateTime
   tags       String
