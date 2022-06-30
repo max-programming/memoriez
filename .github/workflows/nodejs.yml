@@ -38,6 +38,7 @@ jobs:
         envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
         envkey_CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
         envkey_NEXT_PUBLIC_CLERK_FRONTEND_API: ${{ secrets.NEXT_PUBLIC_CLERK_FRONTEND_API }}
+        envkey_PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
         
         
     - run: npm i
