@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={chakraTheme}>
         <ClerkProvider {...pageProps}>
           <DefaultSeo
-            title="Memoriez - What's in your Memoriez"
+            title='Memoriez - A quick and easy journal'
             additionalLinkTags={[
               {
                 rel: 'icon',
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             openGraph={{
               type: 'website',
               url: 'https://www.memoriez.cc',
-              site_name: "Memoriez - What's in your Memoriez",
+              site_name: 'Memoriez - A quick and easy journal',
               images: [
                 {
                   url: '/cover.png',
