@@ -25,6 +25,9 @@ export default function NewPage() {
           type='submit'
           mt='5'
           isLoading={entryFormProps.isLoading}
+          disabled={
+            router.query.p === 'mood' && entryFormProps.mood.length === 0
+          }
           loadingText='ADDING...'
         >
           {router.query.p === 'mood' ? 'ADD' : 'NEXT'}
