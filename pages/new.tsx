@@ -6,13 +6,16 @@ import { Layout } from '@/components';
 
 export default function NewPage() {
   const router = useRouter();
-  const entryFormProps = useEntryForm();
+  const entryFormProps = useEntryForm({});
 
   return (
     <Layout>
       <form onSubmit={entryFormProps.handleSubmit}>
         {router.query.p === 'mood' ? (
-          <MoodSelector />
+          <MoodSelector
+            setMood={entryFormProps.setMood}
+            mood={entryFormProps.mood}
+          />
         ) : (
           <EntryForm {...entryFormProps} />
         )}

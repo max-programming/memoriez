@@ -22,10 +22,10 @@ interface EntryFormProps {
   story: string;
   date: Date;
   tags: string[];
-  selectedPhoto: string;
+  selectedPhoto?: string;
   setTitle: SetState<string>;
   setStory: SetState<string>;
-  setSelectedPhoto: SetState<string>;
+  setSelectedPhoto: SetState<string | undefined>;
   setDate: SetState<Date>;
   addTag: (text: string) => void;
   removeTag: (text: string) => void;
@@ -42,7 +42,7 @@ export const EntryForm = (props: EntryFormProps) => {
         <FormLabel htmlFor='date'>Date</FormLabel>
         <SingleDatepicker
           id='date'
-          date={props.date}
+          date={new Date(props.date)}
           onDateChange={props.setDate}
           propsConfigs={{
             inputProps: {

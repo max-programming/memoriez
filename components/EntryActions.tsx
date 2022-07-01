@@ -12,11 +12,13 @@ import {
   ModalOverlay,
   UseModalProps,
   useDisclosure,
+  Link,
 } from '@chakra-ui/react';
 import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 import { useState } from 'react';
 import { FaPenAlt, FaTrash } from 'react-icons/fa';
+import NextLink from 'next/link';
 
 export const EntryActions = ({
   entryId,
@@ -29,14 +31,16 @@ export const EntryActions = ({
   return (
     <>
       <Flex p='3' align='center' justify='flex-end' gap={5}>
-        <IconButton
-          variant='ghost'
-          size='lg'
-          icon={<FaPenAlt />}
-          colorScheme='blue'
-          aria-label='Edit'
-        />
-
+        <NextLink passHref href={`/entry/edit/${entryId}`}>
+          <IconButton
+            as={Link}
+            variant='ghost'
+            size='lg'
+            icon={<FaPenAlt />}
+            colorScheme='blue'
+            aria-label='Edit'
+          />
+        </NextLink>
         <IconButton
           variant='ghost'
           size='lg'

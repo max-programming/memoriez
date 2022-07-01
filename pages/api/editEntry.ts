@@ -14,7 +14,7 @@ const emoji = new EmojiAPI();
 const createSchema = z.object({
   story: z.string().min(1),
   mood: z.string().min(1),
-  coverImage: z.string().url().optional(),
+  coverImage: z.string().url().nullable(),
   title: z
     .string()
     .min(1)
@@ -34,11 +34,19 @@ async function handler(
 ) {
   try {
     const { userId } = req.auth;
+    const { id } = req.query;
     const { coverImage, title, story, date, mood, tags } = createSchema.parse(
       req.body
     );
 
     console.log({ userId });
+
+    if (typeof id !== 'string') {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid ID',
+      });
+    }
 
     if (!userId) {
       return res.status(401).json({
@@ -51,7 +59,10 @@ async function handler(
       Twitter: { url },
     } = await emoji.get(mood.split(' ')[0]);
 
-    const createdEntry = await prisma.entry.create({
+    const updatedEntry = await prisma.entry.update({
+      where: {
+        id,
+      },
       data: {
         mood: url,
         date,
@@ -66,7 +77,7 @@ async function handler(
     return res.json({
       success: true,
       message: 'Entry successfully created',
-      data: createdEntry,
+      data: updatedEntry,
     });
   } catch (error) {
     console.error({ error });

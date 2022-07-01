@@ -26,8 +26,8 @@ import { useQuery } from 'react-query';
 import Loader from 'react-spinners/PulseLoader';
 
 interface Props {
-  selectedPhoto: string;
-  setSelectedPhoto: SetState<string>;
+  selectedPhoto?: string;
+  setSelectedPhoto: SetState<string | undefined>;
 }
 
 export const CoverImageSelector = ({
@@ -58,9 +58,10 @@ export const CoverImageSelector = ({
   return (
     <>
       <Flex align='center' justify='center'>
-        {selectedPhoto.length !== 0 && (
-          <Image w='28' src={selectedPhoto} alt='' mr='5' />
-        )}
+        {!selectedPhoto ||
+          (selectedPhoto.length !== 0 && (
+            <Image w='28' src={selectedPhoto} alt='' mr='5' />
+          ))}
         <Button onClick={onOpen} leftIcon={<PexelsIcon />}>
           Pick a cover image
         </Button>
