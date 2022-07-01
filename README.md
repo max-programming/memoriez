@@ -12,13 +12,11 @@ Memoriez is a web-based platform to write your stories. It's an alternative to m
 - Add cover image
 - Set your mood of the day
 
-
 ## Tech Stack
 
 **Client:** Next.js, Chakra UI
 
 **Server:** Prisma, PlanetScale DB
-
 
 ## Screenshots
 
@@ -36,25 +34,24 @@ To run this project, you will need to add the following environment variables to
 
 `NEXT_PUBLIC_CLERK_FRONTEND_API` - From [Clerk](https://clerk.dev)
 
-
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/max-programming/memoriez
+git clone https://github.com/max-programming/memoriez
 ```
 
 Go to the project directory
 
 ```bash
-  cd memoriezz
+cd memoriezz
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+npm install
 ```
 
 Add the environment variables
@@ -62,14 +59,12 @@ Add the environment variables
 Start the server
 
 ```bash
-  npm run start
+npm run dev
 ```
-
 
 ## Feedback
 
 If you have any feedback, please reach out to the issues panel and create an issue to let me know
-
 
 ## Contributing
 
