@@ -14,11 +14,20 @@ import { chakraTheme } from '@/utils/chakraTheme';
 import { DefaultSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
+import { useRef } from 'react';
+import { useScript } from '@/hooks/useScript';
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useScript(
+    process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL!,
+    process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID!,
+    ref
+  );
 
   return (
     <>
