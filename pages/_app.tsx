@@ -21,61 +21,63 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={chakraTheme}>
-        <ClerkProvider {...pageProps}>
-          {process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL &&
-            process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
-              <Script
-                src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
-                data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-                strategy='lazyOnload'
-              />
-            )}
-          <DefaultSeo
-            title='Memoriez - A quick and easy journal'
-            additionalLinkTags={[
-              {
-                rel: 'icon',
-                href: '/logo.png',
-              },
-            ]}
-            twitter={{
-              cardType: 'summary_large_image',
-              handle: '@MaxProgramming1',
-            }}
-            openGraph={{
-              type: 'website',
-              url: 'https://www.memoriez.cc',
-              site_name: 'Memoriez - A quick and easy journal',
-              images: [
+    <>
+      {process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL &&
+        process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
+          <Script
+            src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
+            data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+            strategy='lazyOnload'
+          />
+        )}
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider theme={chakraTheme}>
+          <ClerkProvider {...pageProps}>
+            <DefaultSeo
+              title='Memoriez - A quick and easy journal'
+              additionalLinkTags={[
                 {
-                  url: '/cover.png',
+                  rel: 'icon',
+                  href: '/logo.png',
                 },
-              ],
-            }}
-          />
-          <NextNProgress
-            options={{ showSpinner: false }}
-            color={theme.colors.whatsapp[200]}
-          />
-          {router.pathname === '/new' ? (
-            <ClerkLoaded>
-              <SignedOut>
-                <RedirectToSignIn />
-              </SignedOut>
-              <SignedIn>
+              ]}
+              twitter={{
+                cardType: 'summary_large_image',
+                handle: '@MaxProgramming1',
+              }}
+              openGraph={{
+                type: 'website',
+                url: 'https://www.memoriez.cc',
+                site_name: 'Memoriez - A quick and easy journal',
+                images: [
+                  {
+                    url: '/cover.png',
+                  },
+                ],
+              }}
+            />
+            <NextNProgress
+              options={{ showSpinner: false }}
+              color={theme.colors.whatsapp[200]}
+            />
+            {router.pathname === '/new' ? (
+              <ClerkLoaded>
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+                <SignedIn>
+                  <Component {...pageProps} />
+                </SignedIn>
+              </ClerkLoaded>
+            ) : (
+              <ClerkLoaded>
                 <Component {...pageProps} />
-              </SignedIn>
-            </ClerkLoaded>
-          ) : (
-            <ClerkLoaded>
-              <Component {...pageProps} />
-            </ClerkLoaded>
-          )}
-        </ClerkProvider>
-      </ChakraProvider>
-    </QueryClientProvider>
+              </ClerkLoaded>
+            )}
+          </ClerkProvider>
+        </ChakraProvider>
+      </QueryClientProvider>
+    </>
   );
 }
 
