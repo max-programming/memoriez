@@ -13,7 +13,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { chakraTheme } from '@/utils/chakraTheme';
 import { DefaultSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 
 const queryClient = new QueryClient();
 
@@ -24,13 +23,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={chakraTheme}>
         <ClerkProvider {...pageProps}>
-          <Script
-            async
-            defer
-            data-website-id='4b493259-b01a-4728-976a-c357291ec12e'
-            src='https://analytics.usman-s.me/umami.js'
-            strategy='afterInteractive'
-          />
           <DefaultSeo
             title='Memoriez - A quick and easy journal'
             additionalLinkTags={[
