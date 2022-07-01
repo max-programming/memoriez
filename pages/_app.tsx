@@ -1,15 +1,24 @@
 // import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { ClerkLoaded, ClerkProvider } from '@clerk/nextjs';
+import {
+  ClerkLoaded,
+  ClerkProvider,
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+} from '@clerk/nextjs';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import NextNProgress from 'nextjs-progressbar';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { chakraTheme } from '@/utils/chakraTheme';
 import { DefaultSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={chakraTheme}>
@@ -41,9 +50,20 @@ function MyApp({ Component, pageProps }: AppProps) {
             options={{ showSpinner: false }}
             color={theme.colors.whatsapp[200]}
           />
-          <ClerkLoaded>
-            <Component {...pageProps} />
-          </ClerkLoaded>
+          {router.pathname === '/new' ? (
+            <ClerkLoaded>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+              <SignedIn>
+                <Component {...pageProps} />
+              </SignedIn>
+            </ClerkLoaded>
+          ) : (
+            <ClerkLoaded>
+              <Component {...pageProps} />
+            </ClerkLoaded>
+          )}
         </ClerkProvider>
       </ChakraProvider>
     </QueryClientProvider>
